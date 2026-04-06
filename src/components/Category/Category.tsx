@@ -1,15 +1,20 @@
+import { Link } from "react-router-dom";
+import type { TCategory } from "@customTypes/category";
 
-const Category = () => {
+
+const Category = ({title , prefix , img} :TCategory) => {
   return (
     <div className="w-30 h-30 my-5">
+      <Link  to={`/categories/products/${prefix}`} className=" text-black" >
       <div className="overflow-hidden rounded-full ">
         <img
-          src="https://cdn-eu.dynamicyield.com/api/9876644/images/244c68ad42d8b__hp-w12-22032022-h_m-women_shirts-blouses.jpg"
-          alt=""
+          src={img}
+          alt={title}
           className="w-full h-full"
         />
       </div>
-      <h4 className="text-center text-xl mt-2">Title</h4>
+      <h4 className="text-center text-xl mt-2">{title}</h4>
+      </Link>
     </div>
   );
 };
