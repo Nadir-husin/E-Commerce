@@ -4,7 +4,8 @@ import { useAppDispatch , useAppSelector } from "@store/hooks";
 import { useEffect } from "react";
 import { actGetCategories } from "@store/Categories/categoriesSlice";
 import Loading from "@components/UI/common/Loading";
-import Gridlist from "@components/GridList/Gridlist";
+import Gridlist from "@components/GridList/GridList";
+import Heading from "@components/UI/common/Heading";
 
 const Categories = () => {
   const dispatch = useAppDispatch()
@@ -20,6 +21,7 @@ const Categories = () => {
 
   return (
     <Container>
+      <Heading>Categories</Heading>
       <Loading status={loading} error={error} >
         <Gridlist records={records} renderItem={(category) => <Category {...category} />} />
       </Loading>

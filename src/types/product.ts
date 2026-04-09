@@ -1,7 +1,9 @@
 export type TProduct = {
-    id : string ,
+    id : number ,
     title : string ,
     price : string ,
     catPrefix: string ,
-    img : string 
+    img : string ,
+    quantity?:number
+    max : number
 }

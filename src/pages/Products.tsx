@@ -1,8 +1,11 @@
 import { useParams } from "react-router-dom";
+import { memo, useEffect } from "react";
+
+
+//components 
 import { Container } from "react-bootstrap";
 import  Product  from "@components/Product/Product";
-import { useEffect } from "react";
-import Gridlist from "@components/GridList/Gridlist";
+import Gridlist from "@components/GridList/GridList";
 
 
 
@@ -10,12 +13,18 @@ import Gridlist from "@components/GridList/Gridlist";
 import { useAppDispatch , useAppSelector } from "@store/hooks";
 import { productsCleanUp ,actGetProducts  } from "@store/products/productsSlice";
 import Loading from "@components/UI/common/Loading";
+import  Heading  from "@components/UI/common/Heading";
 
 
-const Products = () => {
+const Products = memo(() => {
   const params = useParams()
   const dispatch = useAppDispatch()
   const {loading , error , records } = useAppSelector((state) =>  state.products)
+  const cartItems = useAppSelector((state) => state .cart.items)
+
+  const productsFullInfo = records.map((item)=>{
+     return {...item , quantity : cartItems[item.id] || 0 }
+  })
 
   useEffect(()=>{
     let prefix : string
@@ -32,11 +41,12 @@ const Products = () => {
 
   return (
     <Container>
+      <Heading>{params.prefix} Products</Heading>
       <Loading status={loading} error={error}>
-        <Gridlist records={records} renderItem={(product)=><Product {...product}/>}/>
+        <Gridlist records={productsFullInfo} renderItem={(product)=><Product {...product}/>}/>
       </Loading>
     </Container>
   );
-};
+});
 
 export default Products;

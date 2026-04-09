@@ -8,7 +8,7 @@ type TGridListProps <T>={
 }
 
 type hasId = {
-    id? : string
+    id? : number
 }
 
 const Gridlist = <T extends hasId> ({records , renderItem } :TGridListProps<T>) => {
