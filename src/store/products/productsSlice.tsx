@@ -2,7 +2,6 @@ import type { TProduct } from "@customTypes/product";
 import type { TLoading } from "@customTypes/shared";
 import { createSlice } from "@reduxjs/toolkit";
 import actGetProducts from "./act/actGetProducts";
-
 interface IProductsState{
     records:TProduct[]
     loading : TLoading
@@ -22,6 +21,7 @@ const productsSlice = createSlice ({
     name:"products",
     initialState:initialState,
     reducers:{
+
         productsCleanUp:(state)=>{
             state.records = []
         }

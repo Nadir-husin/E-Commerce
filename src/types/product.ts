@@ -4,6 +4,8 @@ export type TProduct = {
     price : string ,
     catPrefix: string ,
     img : string ,
-    quantity?:number
-    max : number
+    quantity?:number,
+    max : number,
+    isLiked? : boolean
+
 }
