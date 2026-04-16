@@ -1,8 +1,3 @@
-//redux
-import { useAppDispatch , useAppSelector } from "@store/hooks"
-import { actGetProductsByItems, cartItemChangeQuantity,cartItemRemove } from "@store/Cart/cartSlice"
-
-
 
 // components
 import  CartItemList from "@components/CartItemList/CartItemList"
@@ -10,33 +5,18 @@ import CartSubtotalPrice from "@components/CartSubtotalPrice/CartSubtotalPrice"
 import  Heading  from "@components/UI/common/Heading"
 import Loading from "@components/UI/common/Loading"
 
-//react
-import { useCallback, useEffect } from "react"
+//hooks
+import useCart from "@hooks/useCart"
 
 
 
 function Cart() {
-  const dispatch = useAppDispatch();
-  const {items ,productsFullInfo, loading , error} = useAppSelector((state) => state.cart)
-  const products = productsFullInfo.map((el) => ({...el , quantity : items[el.id]}))
 
-  useEffect(()=>{
-    dispatch(actGetProductsByItems())
-  },[dispatch ])
-
-
-  const changeQuantityHandler = useCallback((id:number , quantity : number)=>{
-    dispatch(cartItemChangeQuantity({id , quantity}))
-  },[dispatch])
-  
-  const removeItemHander = useCallback((id:number)=>{
-      dispatch(cartItemRemove(id))
-  },[dispatch])
-  
+  const { products, loading, error, changeQuantityHandler, removeItemHander }=useCart()
 
   return (
     <div className="w-[80%] mx-auto  my-3  ">
-     <Heading>Your Cart</Heading>
+     <Heading title="Your Cart"/>
      <Loading status={loading} error={error}>
       {products.length ? 
       <>

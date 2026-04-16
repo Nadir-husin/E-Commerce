@@ -3,7 +3,7 @@ import { useAppDispatch } from "@store/hooks";
 import { addToCart } from "@store/Cart/cartSlice";
 import { actLikeToggle } from "@store/wishlist/wishlistSlice";
 //react
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 //types
 import type { TProduct } from "@customTypes/product";
@@ -14,7 +14,7 @@ import imgg from "@assets/sweater_nobg_smaller.png"
 import like from "@assets/like.svg"
 import likeFill from "@assets/like-fill.svg"
 
-const Product = ({ id, title, price, max, quantity, isLiked }: TProduct) => {
+const Product = memo( ({ id, title, price, max, quantity, isLiked }: TProduct) => {
   const dispatch = useAppDispatch();
   const [isBtnDisabled, setIsBtnDisabled] = useState(false)
   const [isLoading, setIsloading] = useState(false)
@@ -66,6 +66,6 @@ const Product = ({ id, title, price, max, quantity, isLiked }: TProduct) => {
       </Button>
     </div>
   );
-};
+});
 
 export default Product;

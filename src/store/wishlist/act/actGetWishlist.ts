@@ -5,11 +5,11 @@ import type { TProduct } from "@customTypes/product";
 
 
 const actGetWishlist = createAsyncThunk("wishlist/actGetWishlist", async (_, thunkAPI) => {
-  const { rejectWithValue } = thunkAPI;
+  const { rejectWithValue ,signal } = thunkAPI;
 
   try {
 
-    const userWishlist = await axios.get<{ id: number; userId: number; productId: number }[]>("/wishlist?userId=1");
+    const userWishlist = await axios.get<{ id: number; userId: number; productId: number }[]>("/wishlist?userId=1" ,{signal});
 
     if (!userWishlist.data.length) {
       return [];

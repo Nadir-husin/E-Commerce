@@ -9,7 +9,7 @@ import type { TProduct } from "@customTypes/product"
 const actGetProductsByItems = createAsyncThunk(
   "cart/getProductsByItems",
   async (_, thunkAPI) => {
-    const { rejectWithValue, getState } = thunkAPI
+    const { rejectWithValue, getState , signal} = thunkAPI
     const { cart } = getState() as RootState
     const itemsId = Object.keys(cart.items)
 
@@ -19,7 +19,7 @@ const actGetProductsByItems = createAsyncThunk(
 
     try {
       const requests = itemsId.map((id) =>
-        axios.get<TProduct>(`/products/${id}`)
+        axios.get<TProduct>(`/products/${id}`, { signal })
       )
 
       const responses = await Promise.all(requests)
