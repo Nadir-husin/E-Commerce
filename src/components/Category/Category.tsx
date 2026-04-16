@@ -4,7 +4,7 @@ import type { TCategory } from "@customTypes/category";
 
 const Category = ({title , prefix , img} :TCategory) => {
   return (
-    <div className="w-30 h-30 my-5">
+    <div className="w-50 h-50 my-5">
       <Link  to={`/categories/products/${prefix}`} className=" text-black" >
       <div className="overflow-hidden rounded-full ">
         <img

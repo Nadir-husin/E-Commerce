@@ -1,22 +1,11 @@
-import { Link, useRouteError, isRouteErrorResponse } from "react-router-dom";
+import { Link } from "react-router-dom";
+import LottieHandler from "@components/UI/feedback/LottieHandler/LottieHandler";
 
 const Error = () => {
-  const error = useRouteError();
-  let errorStatus: number;
-  let errorStatusText: string;
-
-  if (isRouteErrorResponse(error)) {
-    errorStatus = error.status;
-    errorStatusText = error.statusText;
-  } else {
-    errorStatus = 404;
-    errorStatusText = "Page Not Found";
-  }
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className="">{errorStatus}</h1>
-      <p>{errorStatusText}</p>
+    <div className="flex flex-col items-center mt-20">
+      <LottieHandler type="NotFound" message="Page not found"/>
       <Link to="/" replace={true}>
         How about going back to safety?
       </Link>

@@ -6,7 +6,6 @@ const actLikeToggle = createAsyncThunk("wishlist/actLikeToggle", async (id: numb
     const { rejectWithValue } = thunkAPI
     try {
         const isRecordExit = await axios.get(`/wishlist?userId=1&productId=${id}`)
-        console.log(isRecordExit , id )
         if(isRecordExit.data.length > 0){
             await axios.delete(`/wishlist/${isRecordExit.data[0].id}`)
             return {type : "remove" , id }

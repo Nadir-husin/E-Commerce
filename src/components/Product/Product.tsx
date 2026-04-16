@@ -50,7 +50,9 @@ const Product = memo( ({ id, title, price, max, quantity, isLiked }: TProduct) =
   return (
     <div className="w-30 flex flex-col justify-between">
       <div className=" relative">
-        {isLoading ? (<p className="absolute top-2 right-1 cursor-pointer p-0.5 bg-white "><Spinner animation="border" size="sm" variant="primary" /></p>) : (<img src={isLiked ? likeFill : like} className="absolute top-2 right-1 cursor-pointer p-0.5 bg-white   hover:shadow-lg transition rounded-md" onClick={likeToggleHandler} />)}
+        {isLoading ? (<div className="absolute top-2 right-1 cursor-pointer p-0.5 bg-white ">
+          <Spinner animation="border" size="sm" variant="primary" /></div>)
+           : (<img src={isLiked ? likeFill : like} className="absolute top-2 right-1 cursor-pointer p-0.5 bg-white   hover:shadow-lg transition rounded-md" onClick={likeToggleHandler} />)}
         <img
           className="w-full h-35 rounded-lg"
           style={{ background: "#f2f2f2" }}
