@@ -10,11 +10,10 @@ import type { TProduct } from "@customTypes/product";
 
 //components
 import { Button, Spinner } from "react-bootstrap";
-import imgg from "@assets/sweater_nobg_smaller.png"
 import like from "@assets/like.svg"
 import likeFill from "@assets/like-fill.svg"
 
-const Product = memo( ({ id, title, price, max, quantity, isLiked }: TProduct) => {
+const Product = memo( ({ id, title, price, max, quantity, isLiked  ,img}: TProduct) => {
   const dispatch = useAppDispatch();
   const [isBtnDisabled, setIsBtnDisabled] = useState(false)
   const [isLoading, setIsloading] = useState(false)
@@ -56,7 +55,7 @@ const Product = memo( ({ id, title, price, max, quantity, isLiked }: TProduct) =
         <img
           className="w-full h-35 rounded-lg"
           style={{ background: "#f2f2f2" }}
-          src={imgg}
+          src={img}
           alt={title}
         />
       </div>

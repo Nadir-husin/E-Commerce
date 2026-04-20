@@ -3,12 +3,13 @@ import NotFound from "@assets/lottieFiles/NotFound.json"
 import Empty from "@assets/lottieFiles/empty.json"
 import Loading from "@assets/lottieFiles/Loading.json"
 import Error from "@assets/lottieFiles/Error.json"
-
+import Auth from "@assets/lottieFiles/Auth.json"
 const LottiePages ={
     NotFound,
     Empty,
     Loading,
-    Error
+    Error,
+    Auth
 }
     
 

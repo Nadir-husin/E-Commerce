@@ -1,5 +1,4 @@
 import { Form, Button } from "react-bootstrap";
-import img from "@assets/sweater_nobg_smaller.png"
 import type { TProduct } from "@customTypes/product";
 import { memo } from "react";
 
@@ -7,7 +6,7 @@ type TCartItemProps= TProduct &{
   changeQuantityHandler: (id:number , quantity : number)=> void,
   removeItemHander: (id:number )=> void
 }
-const CartItem =  memo( ({id, title  , price , max ,quantity ,changeQuantityHandler ,removeItemHander}:TCartItemProps) =>{
+const CartItem =  memo( ({id, title, img  , price , max ,quantity ,changeQuantityHandler ,removeItemHander}:TCartItemProps) =>{
 
   const renderOptions = Array(max).fill(0).map((_, idx)=>{
         const quan = ++idx
@@ -24,7 +23,7 @@ const CartItem =  memo( ({id, title  , price , max ,quantity ,changeQuantityHand
 
       <div className="flex gap-4">
 
-        <div className="w-40  bg-gray-200 rounded-sm p-2">
+        <div className="w-40  bg-gray-200 rounded-sm ">
             <img src={img} alt=""  className="w-full h-full object-cover"/>
         </div>
 
