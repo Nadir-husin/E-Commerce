@@ -14,11 +14,12 @@ const Login = lazy(() => import("@pages/Login"))
 const Register = lazy(() => import("@pages/Register"))
 const Cart = lazy(() => import("@pages/Cart"))
 const Wishlist = lazy(() => import("@pages/Wishlist"))
+const Profile = lazy(()=> import("@pages/Profile"))
 import Error from "@pages/Error"
 
 // compenents
 import LottieHandler from '@components/UI/feedback/LottieHandler/LottieHandler';
-
+import ProtectedRoute from '@components/ProtectedRoute/ProtectedRoute';
 
 
 
@@ -63,7 +64,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "wishlist",
-                element: <Suspense fallback={<div className="mt-40"><LottieHandler type='Loading'  /></div>}> <Wishlist /></Suspense>
+                element: <ProtectedRoute><Suspense fallback={<div className="mt-40"><LottieHandler type='Loading'  /></div>}> <Wishlist /></Suspense></ProtectedRoute>
             },
             {
                 path: "cart",
@@ -73,9 +74,13 @@ const router = createBrowserRouter([
                 path: "login",
                 element: <Suspense fallback={<div className="mt-40"><LottieHandler type='Loading'  /></div>}><Login /></Suspense>,
             },
-            {
+            { 
                 path: "register",
                 element: <Suspense fallback={<div className="mt-40"><LottieHandler type='Loading'  /></div>}> <Register /></Suspense>,
+            },
+            {
+                path: "profile",
+                element: <ProtectedRoute><Suspense fallback={<div className="mt-40"><LottieHandler type='Loading'  /></div>}> <Profile /></Suspense></ProtectedRoute>,
             },
         ]
     }

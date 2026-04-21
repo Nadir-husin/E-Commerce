@@ -2,7 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { NavLink } from 'react-router-dom';
-import { Badge } from 'react-bootstrap';
+import { Badge , NavDropdown } from 'react-bootstrap';
 import { ShoppingCart, ScrollText } from 'lucide-react';
 
 // react
@@ -10,10 +10,14 @@ import { useEffect, useState } from 'react';
 
 // redux
 import { getCartQuantitySelector } from '@store/Cart/cartSlice';
-import { useAppSelector } from '@store/hooks';
 import HeaderIcons from '@components/HeaderIcons/HeaderIcons';
+import { useAppDispatch , useAppSelector } from '@store/hooks';
+import { authLogout } from '@store/auth/authSlice';
+import actGetWishlist from '@store/wishlist/act/actGetWishlist';
 
 function Header() {
+  const dispatch = useAppDispatch()
+  const { accessToken, user } = useAppSelector((state) => state.auth);
   const [isCartAnimated, setIsCartAnimated] = useState(false);
   const [isWishlistAnimated, setIsWishlistAnimated] = useState(false);
   const totalQuantity = useAppSelector(getCartQuantitySelector);
@@ -22,6 +26,13 @@ function Header() {
   );
   const cartAnimationClass = isCartAnimated ? 'pump-cart-quantity' : '';
   const wishlistAnimationClass = isWishlistAnimated ? 'pump-cart-quantity' : '';
+
+
+   useEffect(() => {
+    if (accessToken) {
+      dispatch(actGetWishlist("ProductIds"));
+    }
+  }, [dispatch, accessToken]);
 
   useEffect(() => {
     if (!totalQuantity) return;
@@ -70,8 +81,36 @@ function Header() {
             </Nav>
 
             <Nav className="gap-3 items-center">
-              <Nav.Link as={NavLink} to="login">Login</Nav.Link>
-              <Nav.Link as={NavLink} to="register">Sign Up</Nav.Link>
+                <Nav>
+              {!accessToken ? (
+                <>
+                  <Nav.Link as={NavLink} to="login">
+                    Login
+                  </Nav.Link>
+                  <Nav.Link as={NavLink} to="register">
+                    Register
+                  </Nav.Link>
+                </>
+              ) : (
+                <NavDropdown
+                  title={`Welcome: ${user?.firstName} ${user?.lastName}`}
+                  id="basic-nav-dropdown"
+                >
+                  <NavDropdown.Item as={NavLink} to="profile">
+                    Profile
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>Orders</NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item
+                    as={NavLink}
+                    to="/"
+                    onClick={() => dispatch(authLogout())}
+                  >
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )}
+            </Nav>
 
               <div className="flex items-center">
 

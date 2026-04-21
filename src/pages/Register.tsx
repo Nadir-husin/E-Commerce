@@ -1,54 +1,17 @@
-// react 
-import {useForm} from 'react-hook-form'
-import type {SubmitHandler} from 'react-hook-form'
-import { signUpSchema } from '@validations/signUpSchema';
-import type {SignUpType}from '@validations/signUpSchema';
-// zod
-import { zodResolver } from '@hookform/resolvers/zod'
+
 // components
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import LottieHandler from '@components/UI/feedback/LottieHandler/LottieHandler';
 import Heading from '@components/UI/common/Heading';
 import Input from '@components/Form/Input';
-
-// hooks
-import useCheckEmailAvailability from '@hooks/useCheckEmailAvailability';
-
-
+import {  Spinner } from 'react-bootstrap';
+//hooks 
+import useRegister from '@hooks/useRegister';
 function Register() {
-  const {register , handleSubmit , formState:{errors},getFieldState , trigger} = useForm<SignUpType>(
-    {
-      mode : "onBlur",
-      resolver : zodResolver(signUpSchema)
-    }
-  )
-  const {
-    emailAvailabilityStatus,
-    enteredEmail,
-    checkEmailAvailability,
-    resetCheckEmailAvailability,} = useCheckEmailAvailability()
-
-  const submitForm : SubmitHandler<SignUpType> =  (data)=>{
-    console.log(data)
-  }
-
- const emailOnBlurHandler = async (e: React.FocusEvent<HTMLInputElement>)=>{
-  await trigger("email")
-  const value = e.target.value
-  const {isDirty , invalid} = getFieldState("email")
-  if (isDirty && !invalid && enteredEmail !== value){
-    //cheking
-    checkEmailAvailability(value)
-  }
-
-  if(isDirty && invalid && enteredEmail ){
-    resetCheckEmailAvailability()
-  }
+  const { register, handleSubmit, formState: { errors }, loading, error, submitForm, emailOnBlurHandler, emailAvailabilityStatus } = useRegister()
 
 
-  console.log(e)
- }
   return(
     <>
     <div className='  flex justify-evenly items-center h-screen '>
@@ -84,9 +47,10 @@ function Register() {
         <Input label='Confirm Password' name='confirmPassword' type='password' register={register} error={errors.confirmPassword?.message} />
 
 
-      <Button variant="info" type="submit" className='mx-auto d-block text-white' disabled={emailAvailabilityStatus === "checking" ? true : false}>
-        Sign Up
+      <Button variant="info" type="submit" className='mx-auto d-block text-white' disabled={emailAvailabilityStatus === "checking" ? true :  loading === "pending" ? true : false}>
+        {loading === "pending" ?  <><Spinner animation="border" size='sm'></Spinner>  Loading...</>  : "Register"}
       </Button>
+      {error && (<p className='mt-1 text-red-400'>{error}</p>)}
     </Form>
     </div>
 
