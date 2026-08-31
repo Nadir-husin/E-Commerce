@@ -1,73 +1,63 @@
-# React + TypeScript + Vite
+# E-Commerce Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive e-commerce frontend built with React and TypeScript. It provides product browsing, authentication, shopping-cart management, and user-specific wishlists through a modular architecture.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Browse products by category
+- Register and log in to a user account
+- Validate forms and check email availability
+- Protect account-specific routes
+- Add products to a persistent shopping cart
+- Update quantities, remove items, and calculate the subtotal
+- Add and remove products from a user-specific wishlist
+- Display loading skeletons, empty states, and API errors
+- Lazy-load routes to reduce the initial application bundle
 
-## React Compiler
+## Technologies
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19 and TypeScript
+- Redux Toolkit and Redux Persist
+- React Router and Axios
+- React Hook Form and Zod
+- Bootstrap, React Bootstrap, and Tailwind CSS
+- Vite and Lottie React
 
-## Expanding the ESLint configuration
+## Architecture
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The application uses reusable components and custom hooks, feature-based Redux slices, asynchronous thunks, shared TypeScript models, centralized API configuration, and Zod validation schemas. Redux Persist retains authentication and cart state after a refresh.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Requirements: Node.js 20 or later, npm, and a compatible REST API running at `http://localhost:5005`.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone <repository-url>
+cd ecommerce
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Available Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev      # Start the development server
+npm run build    # Type-check and create a production build
+npm run lint     # Run ESLint
+npm run preview  # Preview the production build
 ```
+
+## Key Implementation Details
+
+- Route-level code splitting with `React.lazy` and `Suspense`
+- Typed Redux hooks and feature-based Redux slices
+- Persistent authentication and shopping-cart state
+- Protected wishlist and profile routes
+- Schema-based registration and login validation
+- Asynchronous email-availability validation
+- User-specific wishlist synchronization with the REST API
+- Reusable loading, skeleton, error, and empty-state components
+
+## Current Scope
+
+The core product browsing, authentication, cart, and wishlist experiences are implemented. The profile and order-management areas are currently being developed.
