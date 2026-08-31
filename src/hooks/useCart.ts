@@ -14,7 +14,7 @@ const useCart = () => {
  const dispatch = useAppDispatch();
   const {items ,productsFullInfo, loading , error} = useAppSelector((state) => state.cart)
   const products = productsFullInfo.map((el) => ({...el , quantity : items[el.id]}))
-
+  const userAccessToken = useAppSelector(state => state.auth.accessToken)
   useEffect(()=>{
    const promise = dispatch(actGetProductsByItems())
     return () => {
@@ -34,7 +34,7 @@ const useCart = () => {
   
 
 
-  return { products, loading, error, changeQuantityHandler, removeItemHander }
+  return { products, loading, error, changeQuantityHandler, removeItemHander  ,userAccessToken}
 }
 
 export default useCart

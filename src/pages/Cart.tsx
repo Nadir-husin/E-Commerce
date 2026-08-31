@@ -12,7 +12,7 @@ import useCart from "@hooks/useCart"
 
 function Cart() {
 
-  const { products, loading, error, changeQuantityHandler, removeItemHander } = useCart()
+  const { products, loading, error, changeQuantityHandler, removeItemHander ,userAccessToken } = useCart()
 
   return (
     <div className="w-[80%] mx-auto  my-3  ">
@@ -21,7 +21,7 @@ function Cart() {
         {products.length ?
           <>
             <CartItemList products={products} changeQuantityHandler={changeQuantityHandler} removeItemHander={removeItemHander} />
-            <CartSubtotalPrice products={products} />
+            <CartSubtotalPrice products={products}  userAccessToken={userAccessToken}/>
           </>
           :
           <LottieHandler type="Empty" message="Your Cart is empty"/>

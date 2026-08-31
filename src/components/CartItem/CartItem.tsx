@@ -23,8 +23,8 @@ const CartItem =  memo( ({id, title, img  , price , max ,quantity ,changeQuantit
 
       <div className="flex gap-4">
 
-        <div className="w-40  bg-gray-200 rounded-sm ">
-            <img src={img} alt=""  className="w-full h-full object-cover"/>
+        <div className="w-40 h-40   bg-gray-200 rounded-sm ">
+            <img src={img} alt=""  className="w-full h-full "/>
         </div>
 
         <div className="flex flex-col justify-between w-40">
